@@ -22,6 +22,8 @@ spec:
             - {{ .Release.Name }}
             - --infra-id
             - {{ .Release.Name | trunc -12 }}
+            - --namespace
+            - {{ .Release.Namespace }}
             - --secret-creds
             - {{ .Values.secret }}
             - --region
