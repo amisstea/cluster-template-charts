@@ -25,7 +25,8 @@
       "description": "AWS EC2 instance type for worker nodes. Use m5.* for amd64 and m6g.* for arm64.",
       "enum": [
         "m5.large", "m5.xlarge", "m5.2xlarge",
-        "m6g.large", "m6g.xlarge", "m6g.2xlarge"
+        "m6g.large", "m6g.xlarge", "m6g.2xlarge",
+        "p3.2xlarge", "g3s.xlarge", "g5g.xlarge"
       ]
     },
     "nodePoolReplicas": {
