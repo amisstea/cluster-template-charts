@@ -29,7 +29,7 @@ spec:
             - --region
             - {{ .Values.region }}
             - --arch
-            {{- if hasPrefix "m6g." .Values.instanceType }}
+            {{- if or (hasPrefix "m6g." .Values.instanceType) (hasPrefix "g5g." .Values.instanceType) }}
             - arm64
             {{- else }}
             - amd64
