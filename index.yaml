@@ -3,28 +3,6 @@ entries:
   hypershift-aws-template:
   - apiVersion: v2
     appVersion: 0.0.1
-    created: "2024-06-21T00:24:40.044138182Z"
-    description: A Helm chart for provisioning a hypershift cluster with a single
-      NodePool in AWS
-    digest: eb09d4619af2612b58882ec9d49cff091a30785b60fe0ad6dc76d2e92ed8c687
-    name: hypershift-aws-template
-    type: application
-    urls:
-    - https://github.com/amisstea/cluster-template-charts/releases/download/hypershift-aws-template-0.0.5/hypershift-aws-template-0.0.5.tgz
-    version: 0.0.5
-  - apiVersion: v2
-    appVersion: 0.0.1
-    created: "2024-06-20T23:23:58.724402836Z"
-    description: A Helm chart for provisioning a hypershift cluster with a single
-      NodePool in AWS
-    digest: 819f2f3194a713713ca111c34efd423f30292d80e14787ba082ffbe5befca1db
-    name: hypershift-aws-template
-    type: application
-    urls:
-    - https://github.com/amisstea/cluster-template-charts/releases/download/hypershift-aws-template-0.0.4/hypershift-aws-template-0.0.4.tgz
-    version: 0.0.4
-  - apiVersion: v2
-    appVersion: 0.0.1
     created: "2024-06-20T15:39:00.241740487Z"
     description: A Helm chart for provisioning a hypershift cluster with a single
       NodePool in AWS
