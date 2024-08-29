@@ -28,6 +28,7 @@ spec:
             - "{{ .Values.secret }}"
             - --region
             - "{{ .Values.region }}"
+            - --multi-arch
             - --arch
             {{- if hasPrefix "m6g." .Values.instanceType }}
             - arm64
