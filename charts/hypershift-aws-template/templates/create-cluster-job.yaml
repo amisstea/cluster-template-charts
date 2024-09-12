@@ -11,9 +11,18 @@ spec:
     spec:
       serviceAccountName: "{{ .Values.serviceAccount }}"
       restartPolicy: Never
+      volumes:
+        {{- include "credential-volumes" . | nindent 8 }}
+      initContainers:
+        {{- include "aws-sts-init-container" . | nindent 8 }}
       containers:
         - name: hypershift
           image: quay.io/hypershift/hypershift-operator:{{ .Values.hypershiftImageTag }}
+          volumeMounts:
+            - name: sts
+              mountPath: /sts
+            - name: secret
+              mountPath: /secret
           args:
             - create
             - cluster
@@ -24,10 +33,17 @@ spec:
             - "{{ .Release.Name | trunc -12 }}"
             - --namespace
             - "{{ .Release.Namespace }}"
-            - --secret-creds
-            - "{{ .Values.secret }}"
+            - --sts-creds
+            - /sts/token.json
+            - --role-arn
+            - "{{ .Values.hypershiftRoleArn }}"
+            - --pull-secret
+            - /secret/pull-secret
+            - --base-domain
+            - "{{ .Values.baseDomain }}"
             - --region
             - "{{ .Values.region }}"
+            - --multi-arch
             - --arch
             {{- if hasPrefix "m6g." .Values.instanceType }}
             - arm64

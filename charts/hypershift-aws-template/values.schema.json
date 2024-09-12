@@ -4,6 +4,7 @@
   "required": [
     "baseDomain",
     "hypershiftImageTag",
+    "hypershiftRoleArn",
     "instanceType",
     "nodePoolReplicas",
     "region",
@@ -13,12 +14,16 @@
   ],
   "properties": {
     "baseDomain": {
-      "description": "Base domain already configured in AWS Route53",
-      "type": "string"
+      "type": "string",
+      "description": "Base domain already configured in AWS Route53"
     },
     "hypershiftImageTag": {
-      "description": "Container image tag for the hypershift CLI",
-      "type": "string"
+      "type": "string",
+      "description": "Container image tag for the hypershift CLI"
+    },
+    "hypershiftRoleArn": {
+      "type": "string",
+      "description": "The ARN of the IAM role assumed by the STS credentials provided to the hypershift CLI"
     },
     "instanceType": {
       "type": "string",

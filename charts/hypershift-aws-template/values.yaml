@@ -1,6 +1,6 @@
 # Default values for hypershift-aws-template.
 
-hypershiftImageTag: latest
+hypershiftImageTag: "4.16"
 
 instanceType: m5.large
 

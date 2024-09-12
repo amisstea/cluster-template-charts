@@ -1,0 +1,57 @@
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: cluster-provisioner
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: cluster-provisioner
+rules:
+- apiGroups:
+  - ""
+  resources:
+  - namespaces
+  verbs:
+  - patch
+- apiGroups:
+  - ""
+  resources:
+  - secrets
+  verbs:
+  - "*"
+- apiGroups:
+  - hypershift.openshift.io
+  resources:
+  - hostedclusters
+  - nodepools
+  verbs:
+  - "*"
+- apiGroups:
+  - clustertemplate.openshift.io
+  resources:
+  - clustertemplateinstances
+  verbs:
+  - "*"
+- apiGroups:
+  - clustertemplate.openshift.io
+  resources:
+  - clustertemplates
+  verbs:
+  - get
+  - list
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: cluster-provisioner-rb
+subjects:
+- kind: ServiceAccount
+  name: cluster-provisioner
+roleRef:
+  kind: Role
+  name: cluster-provisioner
+  apiGroup: rbac.authorization.k8s.io
