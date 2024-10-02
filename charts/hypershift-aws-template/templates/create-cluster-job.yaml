@@ -17,12 +17,14 @@ spec:
         {{- include "aws-sts-init-container" . | nindent 8 }}
       containers:
         - name: hypershift
-          image: quay.io/hypershift/hypershift-operator:{{ .Values.hypershiftImageTag }}
+          image: "{{ .Values.hypershiftImage }}"
           volumeMounts:
             - name: sts
               mountPath: /sts
             - name: secret
               mountPath: /secret
+          command:
+            - hypershift
           args:
             - create
             - cluster

@@ -1,6 +1,6 @@
 # Default values for hypershift-aws-template.
 
-hypershiftImageTag: "4.16"
+hypershiftImage: quay.io/hypershift/hypershift-operator:latest
 
 instanceType: m5.large
 
