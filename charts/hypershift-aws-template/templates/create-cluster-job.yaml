@@ -13,6 +13,9 @@ spec:
       restartPolicy: Never
       volumes:
         {{- include "credential-volumes" . | nindent 8 }}
+        - name: config
+          configMap:
+            name: config-{{ .Release.Name }}
       initContainers:
         {{- include "aws-sts-init-container" . | nindent 8 }}
       containers:
@@ -20,9 +23,11 @@ spec:
           image: "{{ .Values.hypershiftImage }}"
           volumeMounts:
             - name: sts
-              mountPath: /sts
+              mountPath: /opt/hypershift/sts
             - name: secret
-              mountPath: /secret
+              mountPath: /opt/hypershift/secret
+            - name: config
+              mountPath: /opt/hypershift/config
           command:
             - hypershift
           args:
@@ -36,11 +41,13 @@ spec:
             - --namespace
             - "{{ .Release.Namespace }}"
             - --sts-creds
-            - /sts/token.json
+            - /opt/hypershift/sts/token.json
             - --role-arn
             - "{{ .Values.hypershiftRoleArn }}"
             - --pull-secret
-            - /secret/pull-secret
+            - /opt/hypershift/secret/pull-secret
+            - --image-content-sources
+            - /opt/hypershift/config/image-content-sources.yaml
             - --base-domain
             - "{{ .Values.baseDomain }}"
             - --region

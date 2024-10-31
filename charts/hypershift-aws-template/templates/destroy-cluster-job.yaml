@@ -25,7 +25,7 @@ spec:
           image: "{{ .Values.hypershiftImage }}"
           volumeMounts:
             - name: sts
-              mountPath: /sts
+              mountPath: /opt/hypershift/sts
           command:
             - hypershift
           args:
@@ -39,7 +39,7 @@ spec:
             - --namespace
             - "{{ .Release.Namespace }}"
             - --sts-creds
-            - /sts/token.json
+            - /opt/hypershift/sts/token.json
             - --role-arn
             - "{{ .Values.hypershiftRoleArn }}"
             - --region

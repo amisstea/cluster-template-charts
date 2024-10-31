@@ -2,6 +2,8 @@
 
 hypershiftImage: quay.io/hypershift/hypershift-operator:latest
 
+imageContentSources: ""
+
 instanceType: m5.large
 
 nodePoolReplicas: 2

@@ -5,6 +5,7 @@
     "baseDomain",
     "hypershiftImage",
     "hypershiftRoleArn",
+    "imageContentSources",
     "instanceType",
     "nodePoolReplicas",
     "region",
@@ -24,6 +25,10 @@
     "hypershiftRoleArn": {
       "type": "string",
       "description": "The ARN of the IAM role assumed by the STS credentials provided to the hypershift CLI"
+    },
+    "imageContentSources": {
+      "type": "string",
+      "description": "Alternate registry information containing a list of sources and their mirrors in yaml format"
     },
     "instanceType": {
       "type": "string",
