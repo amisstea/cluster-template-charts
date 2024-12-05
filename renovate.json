@@ -2,5 +2,23 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
     "config:recommended"
+  ],
+  "enabledManagers": ["regex", "helm", "kubernetes"],
+  "kubernetes": {
+    "fileMatch": [
+      "^k8s/.+\\.yaml$",
+      "^charts/.+\\.(yaml|tpl)"
+    ]
+  },
+  "customManagers": [
+    {
+      "customType": "regex",
+      "fileMatch": ["^charts/.+\\.(yaml|tpl)$"],
+      "matchStrings": [
+        "image: (?<depName>public\\.ecr\\.aws/aws-cli/aws-cli:(?<currentValue>[^@]*)@(?<currentDigest>sha256:[a-f0-9]{64})"
+      ],
+      "autoReplaceStringTemplate": "image: {{depName}}{{#if newValue}}:{{newValue}}{{/if}}{{#if newDigest}}@{{newDigest}}{{/if}}",
+      "datasourceTemplate": "docker"
+    }
   ]
 }
