@@ -22,12 +22,22 @@ jobs:
 
       - name: Run checkov
         uses: bridgecrewio/checkov-action@v12
+        id: checkov
         with:
           output_format: cli,sarif
           output_file_path: console,results.sarif
+          var_file: test/dummy-vars.yaml
+        env:
+          HELM_NAMESPACE: dummy-ns
         continue-on-error: true
 
       - name: Upload SARIF file
         uses: github/codeql-action/upload-sarif@v3
         with:
           sarif_file: results.sarif
+
+      - name: Report failure
+        if: steps.checkov.outcome == 'failure'
+        run: |
+          echo "The checkov scan resulted in failure. See the output of the above step."
+          exit 1

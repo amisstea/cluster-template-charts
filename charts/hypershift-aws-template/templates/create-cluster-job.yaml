@@ -4,6 +4,9 @@ kind: Job
 metadata:
   name: create-cluster-{{ .Release.Name }}
   namespace: "{{ .Release.Namespace }}"
+  annotations:
+    checkov.io/skip-ckv-k8s-40: CKV_K8S_40=RunAsUser should not be set when using the anyuid SCC on OpenShift
+    checkov.io/skip-ckv2-k8s-6: CKV2_K8S_6=NetworkPolicies should be created by namespace admins
 spec:
   template:
     metadata:
@@ -11,6 +14,8 @@ spec:
     spec:
       serviceAccountName: "{{ .Values.serviceAccount }}"
       restartPolicy: Never
+      automountServiceAccountToken: false
+      {{- include "pod-security-context" . | nindent 6 }}
       volumes:
         {{- include "credential-volumes" . | nindent 8 }}
         - name: config
@@ -21,6 +26,8 @@ spec:
       containers:
         - name: hypershift
           image: "{{ .Values.hypershiftImage }}"
+          {{- include "container-resources" . | nindent 10 }}
+          {{- include "container-security-context" . | nindent 10 }}
           volumeMounts:
             - name: sts
               mountPath: /opt/hypershift/sts

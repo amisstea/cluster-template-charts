@@ -1,0 +1,6 @@
+---
+# Dummy values which will allow the charts to be rendered (e.g. for scanning w/checkov)
+baseDomain: dummy-domain
+hypershiftImage: quay.io/hypershift/hypershift-operator:dummy-tag@sha256:e35d4ccc9fc789c4e9255ab8109a12e4a5371a34c7d64687eb14cd749e2ae531
+hypershiftRoleArn: dummy-arn
+version: dummy-version
