@@ -1,0 +1,17 @@
+{{- if .Values.pausePod.enabled }}
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pause-{{ .Release.Name }}
+  namespace: {{ .Release.Namespace }}
+spec:
+  priorityClassName: {{ .Values.pausePod.priorityClass }}
+  containers:
+    - name: pause
+      image: {{ .Values.pausePod.image }}
+      resources:
+        requests:
+          cpu: {{ .Values.pausePod.cpu }}
+          memory: {{ .Values.pausePod.memory }}
+{{- end }}

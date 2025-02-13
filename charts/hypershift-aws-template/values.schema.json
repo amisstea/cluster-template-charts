@@ -18,6 +18,34 @@
       "type": "string",
       "description": "Base domain already configured in AWS Route53"
     },
+    "pausePod": {
+      "type": "object",
+      "description": "Pause pod settings (e.g. for over-provisioning)",
+      "required": [
+        "cpu",
+        "enabled",
+        "image",
+        "memory"
+      ],
+      "properties": {
+        "cpu": {
+          "type": "string",
+          "description": "CPU resources requested by the pause container"
+        },
+        "enabled": {
+          "type": "boolean",
+          "description": "Enables the pause pod"
+        },
+        "image": {
+          "type": "string",
+          "description": "Image used by the pause container"
+        },
+        "memory": {
+          "type": "string",
+          "description": "Memory resources requested by the pause container"
+        }
+      }
+    },
     "hypershiftImage": {
       "type": "string",
       "description": "Container image for the hypershift CLI"

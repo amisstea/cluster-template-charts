@@ -8,6 +8,15 @@ instanceType: m5.large
 
 nodePoolReplicas: 2
 
+pausePod:
+  enabled: false
+  priorityClass: pause-pod-priority
+  image: registry.access.redhat.com/ubi8/pause:8.10@sha256:70fe7710ec4a43b79e142252dbba898ecdfebd5cfb1140b52355db81882aee8c
+  # Sizing based on the baseline resource consumption for a control plane:
+  # https://docs.redhat.com/en/documentation/openshift_container_platform/4.17/html/hosted_control_planes/preparing-to-deploy-hosted-control-planes#hcp-pod-limits_hcp-sizing-guidance
+  cpu: "5"
+  memory: 18Gi
+
 region: us-east-1
 
 # checkov:skip=CKV_SECRET_6:This is the name of a Secret, not its content
